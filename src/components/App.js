@@ -1,4 +1,8 @@
+/**
+ * @fileoverview Contains the entry-point code.
+ */
 import "../css/App.css";
+
 
 function App() {
   return (
