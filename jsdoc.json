@@ -7,10 +7,15 @@
     "plugins": ["plugins/markdown"],
     "templates": {
       "cleverLinks": true,
-      "monospaceLinks": true
+      "monospaceLinks": true,
+      "systemName"            : "Copyist Frontend",
+      "theme"                 : "simplex",
+      "linenums"              : true,
+      "search"                : true 
     },
     "opts": {
       "recurse": true,
-      "destination": "./docs/"
+      "destination": "./docs/",
+      "template": "./node_modules/ink-docstrap/template"
     }
   }
