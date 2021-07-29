@@ -26,6 +26,16 @@ class App extends React.Component {
      * @property {Object} cookies A cookie manager object of {@link 'https://www.npmjs.com/package/universal-cookie' 'universal-cookie'}.
      */
     this.cookies = new Cookies();
+
+    /**
+     * @property {Object} io=null A socket.io client object.
+     */
+    this.io = null;
+
+    /**
+     * @property {boolean} gotConnectionError A flag indicating a connection error.
+     */
+    this.gotConnectionError = false;
   }
 
   /**
@@ -46,6 +56,10 @@ class App extends React.Component {
    */
   setMessage(message) {
     this.setState({ message: message });
+  }
+  
+  connect(url=process.env.SERVER_URL) {
+    return;
   }
 
   render() {

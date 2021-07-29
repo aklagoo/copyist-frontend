@@ -95,8 +95,13 @@ describe('App Communication', () => {
 
     /* Run tests */
     it('should connect to the server', () => {
-        instance.connect('4000');
+        instance.connect('http://localhost:4000');
         expect(hasConnected).toBe(true);
+    });
+
+    it('should detect a connection error', () => {
+        instance.connect('http://localhost:8000');
+        expect(instance.state.gotConnectionError).toBe(true);
     });
 
     it('should send a connection query with a string roomID', () => {
