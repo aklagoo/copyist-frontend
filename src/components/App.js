@@ -11,13 +11,13 @@ class App extends React.Component {
     super();
     this.state = {
         message: '',
-        uuid: ''
+        roomID: ''
     };
     this.cookies = new Cookies();
   }
 
-  setUUID(uuid) { this.cookies.set('uuid', uuid); }
-  getUUID() { return this.cookies.get('uuid'); }
+  setRoomID(roomID) { this.cookies.set('roomID', roomID); }
+  getRoomID() { return this.cookies.get('roomID'); }
 
   setMessage(message) {
     this.setState({ message: message });

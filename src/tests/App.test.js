@@ -60,9 +60,9 @@ describe('App Communication', () => {
 
     /* Create server */
     const httpServer = createServer();
-    const sampleRoomID = '1234567890';
+    const sampleRoomID = '1111111111';
     const sampleMessage = 'Hello world!';
-    io = new Server(httpServer);
+    const io = new Server(httpServer);
 
     /* Server methods */
     httpServer.listen('4000', () => {
