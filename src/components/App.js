@@ -1,5 +1,6 @@
 import React from "react";
 import "../css/App.css";
+import Cookies from 'universal-cookie';
 
 /**
  * @classdesc This component manages socket communication and data storage.
@@ -12,18 +13,19 @@ class App extends React.Component {
         message: "",
         uuid: null
     };
+    this.cookies = new Cookies();
   }
 
   setUUID(uuid) {
-    
+    this.cookies.set('uuid', uuid);
   }
 
   getUUID() {
-    return;
+    return this.cookies.get('uuid');
   }
 
   setMessage(message) {
-    return;
+    this.setState({ message: message });
   }
 
   render() {

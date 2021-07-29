@@ -1,6 +1,7 @@
 import App from '../components/App';
 import { shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
+import Cookies from 'universal-cookie';
 
 configure({ adapter: new Adapter() });
 
@@ -11,6 +12,7 @@ describe('App', () => {
     const sampleMessage = 'Hello world!';
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
+    const cookies = new Cookies();
     
     /* Simulate cookies */
     Object.defineProperty(document, 'cookie', {
@@ -25,17 +27,17 @@ describe('App', () => {
 
     it('should store the UUID in cookies', () => {
         instance.setUUID(sampleUUID);
-        expect(document.cookie).toContain(sampleUUIDMatch);
+        expect(cookies.get('uuid')).toBe(sampleUUID);
     });
 
     it('should read UUID from cookies', () => {
-        document.cookie = 'uuid='+sampleUUIDMatch;
+        cookies.set('uuid', sampleUUID);
         const uuid = instance.getUUID(sampleUUID);
         expect(uuid).toBe(sampleUUID);
     });
 
     it('should set a message in it\'s state', () => {
         instance.setMessage(sampleMessage);
-        expect(app.state.message).toBe(sampleMessage);
+        expect(instance.state.message).toBe(sampleMessage);
     });
 });
