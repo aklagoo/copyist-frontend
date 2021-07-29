@@ -1,12 +1,11 @@
-import { render, screen } from '@testing-library/react';
 import App from '../components/App';
 import { shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
-import {useCookies} from 'react-cookie';
 
 configure({ adapter: new Adapter() });
 
 describe('App', () => {
+    /* Declare basic constants */
     const sampleUUID = '1234567890';
     const sampleUUIDMatch = /0000000000/;
     const sampleMessage = 'Hello world!';
@@ -19,6 +18,7 @@ describe('App', () => {
         value: 'uuid=0000000000',
     });
 
+    /* Tests */
     it('should initialize an empty message', () => {
         expect(instance.state.message).toBe("");
     });
