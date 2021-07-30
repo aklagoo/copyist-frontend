@@ -1,6 +1,10 @@
-import React from "react";
+import React from 'react';
 import "../css/App.css";
 import Cookies from 'universal-cookie';
+import Toolbar from './Toolbar';
+import QRBox from './QRBox';
+import TextBox from './TextBox';
+import banner from '../img/banner.svg';
 
 /**
  * @classdesc Top-level component managing socket communication and storage.
@@ -65,7 +69,14 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <p>Hello</p>
+        <Toolbar />
+        <main>
+          <article>
+            <img className="Banner" src={banner} alt="" />
+            <TextBox />
+          </article>
+          <QRBox />
+        </main>
       </div>
     );
   }
