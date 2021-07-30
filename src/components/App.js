@@ -72,7 +72,7 @@ class App extends React.Component {
         <Toolbar />
         <main>
           <article>
-            <img className="Banner" src={banner} alt="" />
+            <img className="Banner" src={banner} width={600} alt="" />
             <TextBox />
           </article>
           <QRBox />
