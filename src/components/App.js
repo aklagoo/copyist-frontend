@@ -20,10 +20,12 @@ class App extends React.Component {
      * @property {Object} state The internal state of the app.
      * @property {string} state.message='' The latest message received from the server.
      * @property {string} state.roomID='' The roomID for the active room.
+     * @property {boolean} state.gotConnectionError A flag indicating a connection error.
      */
     this.state = {
         message: '',
-        roomID: ''
+        roomID: '',
+        gotConnectionError: false
     };
 
     /**
@@ -35,11 +37,6 @@ class App extends React.Component {
      * @property {Object} io=null A socket.io client object.
      */
     this.io = null;
-
-    /**
-     * @property {boolean} gotConnectionError A flag indicating a connection error.
-     */
-    this.gotConnectionError = false;
   }
 
   /**

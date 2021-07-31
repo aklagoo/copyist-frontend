@@ -25,6 +25,7 @@ describe('App Ops', () => {
     it('should initialize correctly', () => {
         expect(instance.state.message).toBe('');
         expect(instance.state.roomID).toBe('');
+        expect(instance.state.gotConnectionError).toBe(false);
     });
 
     it('should store the room ID in cookies', () => {
