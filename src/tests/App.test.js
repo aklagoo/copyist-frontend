@@ -71,37 +71,42 @@ describe('App Communication', () => {
     const io = new Server(httpServer);
 
     /* Server methods */
-    httpServer.listen('4000', () => {
-        /* Upon connecting, check if roomID matches sample roomID */
-        io.on('connect', (socket) => {
-            hasConnected = true;
-
-            const query = socket.handshake.query;
-            if ('roomID' in query) {
-                if (typeof query['roomID'] === 'string' || query['roomID'] instanceof String) {
-                    isCorrectConnectQuery = true;
+    beforeAll((done) => {
+        httpServer.listen('4000', () => {
+            console.log('listening on 4000');
+            /* Upon connecting, check if roomID matches sample roomID */
+            io.on('connection', (socket) => {
+                hasConnected = true;
+    
+                const query = socket.handshake.query;
+                if ('roomID' in query) {
+                    if (typeof query['roomID'] === 'string' || query['roomID'] instanceof String) {
+                        isCorrectConnectQuery = true;
+                    }
                 }
-            }
-            
-            socket.emit('roomID', sampleRoomID);
-
-            socket.emit('message', sampleMessage);
-
-            socket.on('message', (message) => {
-                hasSentMessage = true;
-                if (typeof message === 'string' || message instanceof String) {
-                    isCorrectMessage = true;
-                }
+                
+                socket.emit('roomID', sampleRoomID);
+    
+                socket.emit('message', sampleMessage);
+    
+                socket.on('message', (message) => {
+                    hasSentMessage = true;
+                    if (typeof message === 'string' || message instanceof String) {
+                        isCorrectMessage = true;
+                    }
+                });
             });
+
+            done();
         });
     });
-
+    
     const wrapper = shallow(<App />);
     const instance = wrapper.instance();
 
     /* Run tests */
     it('should connect to the server', () => {
-        instance.connect('http://localhost:4000');
+        instance.connect('localhost:4000');
         expect(hasConnected).toBe(true);
     });
 
@@ -135,6 +140,8 @@ describe('App Communication', () => {
     });
 
     /* Close server */
-    io.close();
-    httpServer.close();
+    afterAll(() => {
+        io.close();
+        httpServer.close();
+    });
 });
