@@ -1,6 +1,7 @@
 import React from 'react';
 import "../css/App.css";
 import Cookies from 'universal-cookie';
+import { io } from 'socket.io-client';
 import Toolbar from './Toolbar';
 import QRBox from './QRBox';
 import TextBox from './TextBox';
@@ -34,9 +35,9 @@ class App extends React.Component {
     this.cookies = new Cookies();
 
     /**
-     * @property {Object} io=null A socket.io client object.
+     * @property {Object} socket=null A socket.io client object.
      */
-    this.io = null;
+    this.socket = null;
   }
 
   /**
@@ -59,8 +60,22 @@ class App extends React.Component {
     this.setState({ message: message });
   }
   
+  /**
+   * Connects to the server and adds event handlers
+   * @param {string} url The URL of the socket server
+   */
   connect(url=process.env.SERVER_URL) {
-    return;
+    /** Read roomID from cookies */
+    const roomID = this.getRoomID();
+
+    this.socket = io(
+      url, {
+        query: {
+          "roomID": roomID
+        }
+      }
+    );
+
   }
 
   render() {

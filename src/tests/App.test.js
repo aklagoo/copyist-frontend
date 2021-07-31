@@ -28,6 +28,11 @@ describe('App Ops', () => {
         expect(instance.state.gotConnectionError).toBe(false);
     });
 
+    it('should return \'\' if roomID is not set in cookies', () => {
+        cookies.remove('roomID');
+        expect(instance.getRoomID()).toBe('');
+    });
+
     it('should store the room ID in cookies', () => {
         instance.setRoomID(sampleRoomID);
         expect(cookies.get('roomID')).toBe(sampleRoomID);
