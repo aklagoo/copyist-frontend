@@ -2,8 +2,8 @@ import App from '../components/App';
 import { shallow, configure } from 'enzyme';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Cookies from 'universal-cookie';
-import { Server } from 'socket.io';
-import { createServer } from 'http';
+
+jest.setTimeout(30000);
 
 configure({ adapter: new Adapter() });
 
@@ -65,39 +65,38 @@ describe('App Communication', () => {
     });
 
     /* Create server */
-    const httpServer = createServer();
     const sampleRoomID = '1111111111';
     const sampleMessage = 'Hello world!';
-    const io = new Server(httpServer);
+    const io = require('socket.io')(4002);
 
     /* Server methods */
     beforeAll((done) => {
-        httpServer.listen('4000', () => {
-            console.log('listening on 4000');
-            /* Upon connecting, check if roomID matches sample roomID */
-            io.on('connection', (socket) => {
-                hasConnected = true;
-    
-                const query = socket.handshake.query;
-                if ('roomID' in query) {
-                    if (typeof query['roomID'] === 'string' || query['roomID'] instanceof String) {
-                        isCorrectConnectQuery = true;
-                    }
+        /* Upon connecting, check if roomID matches sample roomID */
+        io.on('connection', (socket) => {
+            hasConnected = true;
+            done();
+
+            const query = socket.handshake.query;
+            if ('roomID' in query) {
+                if (typeof query['roomID'] === 'string' || query['roomID'] instanceof String) {
+                    isCorrectConnectQuery = true;
                 }
-                
-                socket.emit('roomID', sampleRoomID);
-    
-                socket.emit('message', sampleMessage);
-    
-                socket.on('message', (message) => {
-                    hasSentMessage = true;
-                    if (typeof message === 'string' || message instanceof String) {
-                        isCorrectMessage = true;
-                    }
-                });
+            }
+            
+            socket.emit('roomID', sampleRoomID);
+
+            socket.emit('message', sampleMessage);
+
+            socket.on('message', (message) => {
+                hasSentMessage = true;
+                if (typeof message === 'string' || message instanceof String) {
+                    isCorrectMessage = true;
+                }
             });
 
-            done();
+            socket.on('disconnect', () => {
+                console.log('Disconnected');
+            });
         });
     });
     
@@ -106,7 +105,7 @@ describe('App Communication', () => {
 
     /* Run tests */
     it('should connect to the server', () => {
-        instance.connect('localhost:4000');
+        instance.connect('http://localhost:4002');
         expect(hasConnected).toBe(true);
     });
 
@@ -142,6 +141,5 @@ describe('App Communication', () => {
     /* Close server */
     afterAll(() => {
         io.close();
-        httpServer.close();
     });
 });

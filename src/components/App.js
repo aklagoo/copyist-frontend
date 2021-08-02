@@ -64,7 +64,7 @@ class App extends React.Component {
    * Connects to the server and adds event handlers
    * @param {string} url The URL of the socket server
    */
-  connect(url=process.env.SERVER_URL) {
+  connect(url) {
     /** Read roomID from cookies */
     const roomID = this.getRoomID();
 
@@ -75,6 +75,11 @@ class App extends React.Component {
         }
       }
     );
+    this.socket.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
+    });
+    
+    console.log(this.socket);
 
   }
 
