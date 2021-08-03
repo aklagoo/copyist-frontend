@@ -65,22 +65,7 @@ class App extends React.Component {
    * @param {string} url The URL of the socket server
    */
   connect(url) {
-    /** Read roomID from cookies */
-    const roomID = this.getRoomID();
-
-    this.socket = io(
-      url, {
-        query: {
-          "roomID": roomID
-        }
-      }
-    );
-    this.socket.on("connect_error", (err) => {
-      console.log(`connect_error due to ${err.message}`);
-    });
-    
-    console.log(this.socket);
-
+    return;
   }
 
   render() {
