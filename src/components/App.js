@@ -26,7 +26,7 @@ class App extends React.Component {
      */
     this.state = {
         message: '',
-        roomID: '',
+        roomID: this.getRoomID(),
         connectedTo: '',
     };
 
