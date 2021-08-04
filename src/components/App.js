@@ -1,3 +1,4 @@
+require('dotenv').config();
 import React from 'react';
 import "../css/App.css";
 import Cookies from 'universal-cookie';
@@ -6,6 +7,7 @@ import Toolbar from './Toolbar';
 import QRBox from './QRBox';
 import TextBox from './TextBox';
 import banner from '../img/banner.svg';
+import conf from '../conf.json'
 
 /**
  * @classdesc Top-level component managing socket communication and storage.
@@ -37,7 +39,7 @@ class App extends React.Component {
     /**
      * @property {Object} socket=null A socket.io client object.
      */
-    this.socket = this.connect(process.env.SERVER_URL);
+    this.socket = null;
   }
 
   /**
@@ -65,9 +67,12 @@ class App extends React.Component {
    * @param {string} url The URL of the socket server
    */
   connect(url) {
+    /* Create socket */
     const socket = io(url);
 
-    return socket;
+    socket.on('roomID', (roomID) => {
+      this.setRoomID(roomID);
+    });
   }
 
   render() {
@@ -83,6 +88,10 @@ class App extends React.Component {
         </main>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.socket = this.connect(conf.SERVER_URL);
   }
 }
 
