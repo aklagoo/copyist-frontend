@@ -18,6 +18,12 @@ class App extends React.Component {
    */
   constructor() {
     super();
+
+    /**
+     * @property {Object} cookies A cookie manager object of {@link 'https://www.npmjs.com/package/universal-cookie' 'universal-cookie'}.
+     */
+    this.cookies = new Cookies();
+
     /**
      * @property {Object} state The internal state of the app.
      * @property {string} state.message='' The latest message received from the server.
@@ -29,11 +35,6 @@ class App extends React.Component {
         roomID: this.getRoomID(),
         connectedTo: '',
     };
-
-    /**
-     * @property {Object} cookies A cookie manager object of {@link 'https://www.npmjs.com/package/universal-cookie' 'universal-cookie'}.
-     */
-    this.cookies = new Cookies();
 
     /**
      * @property {Object} socket=null A socket.io client object.
@@ -64,10 +65,13 @@ class App extends React.Component {
   /**
    * Connects to the server and adds event handlers
    * @param {string} url The URL of the socket server
+   * @param {string} roomID The roomID for the socket
    */
-  connect(url) {
+  connect(url, roomID) {
     /* Create socket */
-    const socket = io(url);
+    const socket = io(url, {
+      query: { 'roomID': roomID }
+    });
 
     socket.on('roomID', (roomID) => {
       this.setRoomID(roomID);
@@ -93,7 +97,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.socket = this.connect(conf.SERVER_URL);
+    this.socket = this.connect(conf.SERVER_URL, this.getRoomID());
     setTimeout(() => { console.log(this.socket); }, 3000);
   }
 }
