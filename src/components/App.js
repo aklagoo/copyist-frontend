@@ -1,4 +1,3 @@
-require('dotenv').config();
 import React from 'react';
 import "../css/App.css";
 import Cookies from 'universal-cookie';
@@ -46,7 +45,7 @@ class App extends React.Component {
    * Setter for cookie 'roomID'.
    * @param {string} roomID The ID of connected socket room.
    */
-  setRoomID(roomID) { this.cookies.set('roomID', roomID); }
+  setRoomID(roomID) { this.cookies.set('roomID', roomID);}
 
   /**
    * Getter for cookie 'roomID'.
@@ -72,7 +71,10 @@ class App extends React.Component {
 
     socket.on('roomID', (roomID) => {
       this.setRoomID(roomID);
+      this.setState({roomID: roomID});
     });
+
+    return socket;
   }
 
   render() {
@@ -92,6 +94,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.socket = this.connect(conf.SERVER_URL);
+    setTimeout(() => { console.log(this.socket); }, 3000);
   }
 }
 
