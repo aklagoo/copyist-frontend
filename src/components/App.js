@@ -26,7 +26,7 @@ class App extends React.Component {
     this.state = {
         message: '',
         roomID: '',
-        gotConnectionError: false
+        connectedTo: '',
     };
 
     /**
@@ -37,7 +37,7 @@ class App extends React.Component {
     /**
      * @property {Object} socket=null A socket.io client object.
      */
-    this.socket = null;
+    this.socket = this.connect(process.env.SERVER_URL);
   }
 
   /**
@@ -65,7 +65,9 @@ class App extends React.Component {
    * @param {string} url The URL of the socket server
    */
   connect(url) {
-    return;
+    const socket = io(url);
+
+    return socket;
   }
 
   render() {
