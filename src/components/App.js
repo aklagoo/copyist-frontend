@@ -22,12 +22,18 @@ class App extends React.Component {
 
   setRoomID(roomID) { this.cookies.set('roomID', roomID);}
   getRoomID() {
-    /* Check if roomID is in cookie */
-    let roomID = this.cookies.get('roomID');
-    if(typeof(roomID) == 'undefined') {
-      roomID = '';
+    /* Get roomID */
+    let roomIDURL = window.location.pathname.substring(1);
+    let roomIDCookie = this.cookies.get('roomID');
+
+    /* Return with precedence */
+    if(roomIDURL != '') {
+      return roomIDURL;
+    } else if (typeof(roomIDCookie) != 'undefined') {
+      return roomIDCookie;
+    } else {
+      return '';
     }
-    return roomID;
   }
   getURLRoomID() { return window.location.pathname.substring(1); }
 
