@@ -6,24 +6,23 @@ import Cookies from 'universal-cookie';
 configure({ adapter: new Adapter() });
 
 describe('App Ops', () => {
-    /* Declare basic constants */
-    const sampleRoomID = '1234567890';
-    const sampleMessage = 'Hello world!';
-    const wrapper = shallow(<App />);
-    const instance = wrapper.instance();
-    const cookies = new Cookies();
-    
     /* Simulate cookies */
     Object.defineProperty(document, 'cookie', {
         writable: true,
         value: 'roomID=',
     });
 
+    /* Declare basic constants */
+    const sampleRoomID = '1234567890';
+    const sampleMessage = 'Hello world!';
+    const wrapper = shallow(<App />);
+    const instance = wrapper.instance();
+    const cookies = new Cookies();
+
     /* Tests */
     it('should initialize correctly', () => {
         expect(instance.state.message).toBe('');
         expect(instance.state.roomID).toBe('');
-        expect(instance.state.gotConnectionError).toBe(false);
     });
 
     it('should return \'\' if roomID is not set in cookies', () => {

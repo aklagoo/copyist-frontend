@@ -33,7 +33,6 @@ class App extends React.Component {
     this.state = {
         message: '',
         roomID: this.getRoomID(),
-        connectedTo: '',
     };
 
     /**
