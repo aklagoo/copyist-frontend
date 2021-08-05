@@ -20,7 +20,11 @@ class App extends React.Component {
     this.socket = null;
   }
 
-  setRoomID(roomID) { this.cookies.set('roomID', roomID);}
+  setRoomID(roomID) {
+    this.setState({roomID: roomID});
+    window.history.pushState({}, document.title, '/' + roomID);
+    this.cookies.set('roomID', roomID);
+  }
   getRoomID() {
     /* Get roomID */
     let roomIDURL = window.location.pathname.substring(1);

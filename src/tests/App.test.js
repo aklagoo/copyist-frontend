@@ -73,7 +73,7 @@ describe('App Ops', () => {
     setRoomIDURL('');
 
     instance.setRoomID(sampleBaseRoomID);
-    expect(window.location.path).toBe('/' + sampleBaseRoomID);
+    expect(window.location.pathname).toBe('/' + sampleBaseRoomID);
   });
   
   it('should update the room ID in cookies [setRoomID]', () => {
