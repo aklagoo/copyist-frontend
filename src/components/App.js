@@ -8,96 +8,54 @@ import TextBox from './TextBox';
 import banner from '../img/banner.svg';
 import conf from '../conf.json'
 
-/**
- * @classdesc Top-level component managing socket communication and storage.
- * @extends React.Component
- */
+
 class App extends React.Component {
-  /**
-   * Initializes state, cookie manager and socket connection.
-   */
   constructor() {
-    super();
-
-    /**
-     * @property {Object} cookies A cookie manager object of {@link 'https://www.npmjs.com/package/universal-cookie' 'universal-cookie'}.
-     */
-    this.cookies = new Cookies();
-
-    /**
-     * @property {Object} state The internal state of the app.
-     * @property {string} state.message='' The latest message received from the server.
-     * @property {string} state.roomID='' The roomID for the active room.
-     * @property {boolean} state.gotConnectionError A flag indicating a connection error.
-     */
-    this.state = {
-        message: '',
-        roomID: this.getRoomID(),
-    };
-
-    /**
-     * @property {Object} socket=null A socket.io client object.
-     */
-    this.socket = null;
+  super();
+  this.cookies = new Cookies();
+  this.state = {
+    message: '',
+    roomID: this.getRoomID(),
+  };
+  this.socket = null;
   }
 
-  /**
-   * Setter for cookie 'roomID'.
-   * @param {string} roomID The ID of connected socket room.
-   */
   setRoomID(roomID) { this.cookies.set('roomID', roomID);}
-
-  /**
-   * Getter for cookie 'roomID'.
-   * @returns {string}
-   */
   getRoomID() { return this.cookies.get('roomID'); }
 
-  /**
-   * Setter for ```this.state.message```.
-   * @param {string} message A message received from the server.
-   */
-  setMessage(message) {
-    this.setState({ message: message });
-  }
+  setMessage(message) { this.setState({ message: message }); }
   
-  /**
-   * Connects to the server and adds event handlers
-   * @param {string} url The URL of the socket server
-   * @param {string} roomID The roomID for the socket
-   */
   connect(url, roomID) {
-    /* Create socket */
-    const socket = io(url, {
-      query: { 'roomID': roomID }
-    });
+  const socket = io(url, {
+    query: { 'roomID': roomID }
+  });
 
-    socket.on('roomID', (roomID) => {
-      this.setRoomID(roomID);
-      this.setState({roomID: roomID});
-    });
+  socket.on('roomID', (roomID) => {
+    this.setRoomID(roomID);
+    this.setState({roomID: roomID});
+  });
 
-    return socket;
+  return socket;
   }
 
   render() {
-    return (
-      <div className="App">
-        <Toolbar />
-        <main>
-          <article>
-            <img className="Banner" src={banner} width={600} alt="" />
-            <TextBox />
-          </article>
-          <QRBox />
-        </main>
-      </div>
-    );
+  return (
+    <div className="App">
+    <Toolbar />
+    <main>
+      <article>
+      <img className="Banner" src={banner} width={600} alt="" />
+      <TextBox />
+      </article>
+      <QRBox />
+    </main>
+    </div>
+  );
   }
 
   componentDidMount() {
-    this.socket = this.connect(conf.SERVER_URL, this.getRoomID());
-    setTimeout(() => { console.log(this.socket); }, 3000);
+  this.socket = this.connect(conf.SERVER_URL, this.getRoomID());
+  setTimeout(() => { console.log(this.socket); }, 3000);
   }
 }
 
