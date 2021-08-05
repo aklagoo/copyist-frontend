@@ -6,7 +6,7 @@ import Toolbar from './Toolbar';
 import QRBox from './QRBox';
 import TextBox from './TextBox';
 import banner from '../img/banner.svg';
-import conf from '../conf.json'
+import conf from '../conf.json';
 
 
 class App extends React.Component {
@@ -22,35 +22,36 @@ class App extends React.Component {
 
   setRoomID(roomID) { this.cookies.set('roomID', roomID);}
   getRoomID() { return this.cookies.get('roomID'); }
+  getURLRoomID() { return window.location.pathname.substring(1); }
 
   setMessage(message) { this.setState({ message: message }); }
   
   connect(url, roomID) {
-  const socket = io(url, {
-    query: { 'roomID': roomID }
-  });
+    const socket = io(url, {
+      query: { 'roomID': roomID }
+    });
 
-  socket.on('roomID', (roomID) => {
-    this.setRoomID(roomID);
-    this.setState({roomID: roomID});
-  });
+    socket.on('roomID', (roomID) => {
+      this.setRoomID(roomID);
+      this.setState({roomID: roomID});
+    });
 
-  return socket;
+    return socket;
   }
 
   render() {
-  return (
-    <div className="App">
-    <Toolbar />
-    <main>
-      <article>
-      <img className="Banner" src={banner} width={600} alt="" />
-      <TextBox />
-      </article>
-      <QRBox />
-    </main>
-    </div>
-  );
+    return (
+      <div className="App">
+      <Toolbar />
+      <main>
+        <article>
+        <img className="Banner" src={banner} width={600} alt="" />
+        <TextBox />
+        </article>
+        <QRBox />
+      </main>
+      </div>
+    );
   }
 
   componentDidMount() {
