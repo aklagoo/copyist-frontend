@@ -40,7 +40,7 @@ describe('App Ops', () => {
     expect(instance.getRoomID()).toBe('');
   });
 
-  it('should read the room ID from cookies if URL is empty [getRoomID]', () => {
+  it('should return the room ID from cookies if URL is empty [getRoomID]', () => {
     /* Set roomID */
     setRoomIDURL('');
     cookies.set('roomID', sampleCookieRoomID);
@@ -48,7 +48,7 @@ describe('App Ops', () => {
     expect(instance.getRoomID()).toBe(sampleCookieRoomID);
   });
 
-  it('should read the room ID from the URL if the cookie is empty [getRoomID]', () => {
+  it('should return the room ID from the URL if the cookie is empty [getRoomID]', () => {
     /* Set roomID */
     setRoomIDURL(sampleURLRoomID);
     cookies.remove('roomID');
@@ -56,7 +56,7 @@ describe('App Ops', () => {
     expect(instance.getRoomID()).toBe(sampleURLRoomID);
   });
 
-  it('should load roomID from the URL over cookies [getRoomID]', () => {
+  it('should return roomID from the URL over cookies [getRoomID]', () => {
     setRoomIDURL(sampleURLRoomID);
     cookies.set('roomID', sampleCookieRoomID);
 
