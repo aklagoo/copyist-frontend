@@ -48,6 +48,14 @@ describe('App Ops', () => {
     expect(instance.getRoomID()).toBe(sampleCookieRoomID);
   });
 
+  it('should read the room ID from the URL if the cookie is empty [getRoomID]', () => {
+    /* Set roomID */
+    setRoomIDURL(sampleURLRoomID);
+    cookies.remove('roomID');
+    
+    expect(instance.getRoomID()).toBe(sampleURLRoomID);
+  });
+
   it('should load roomID from the URL over cookies [getRoomID]', () => {
     setRoomIDURL(sampleURLRoomID);
     cookies.set('roomID', sampleCookieRoomID);
