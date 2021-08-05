@@ -19,8 +19,9 @@ describe('App Ops', () => {
   });
   
   /* Declare basic constants */
-  const sampleCookieRoomID = '1234567890';
-  const sampleURLRoomID = 'abcdef1234';
+  const sampleBaseRoomID = 'Base';
+  const sampleCookieRoomID = 'Cookie';
+  const sampleURLRoomID = 'URL';
   const sampleMessage = 'Hello world!';
   const wrapper = shallow(<App />);
   const instance = wrapper.instance();
@@ -63,11 +64,23 @@ describe('App Ops', () => {
     expect(instance.getRoomID()).toBe(sampleURLRoomID);
   });
 
-  it('should store the room ID in cookies [setRoomID]', () => {
-    instance.setRoomID(sampleCookieRoomID);
-    expect(cookies.get('roomID')).toBe(sampleCookieRoomID);
+  it('should update the room ID in state [setRoomID]', () => {
+    instance.setRoomID(sampleBaseRoomID);
+    expect(instance.state.roomID).toBe(sampleBaseRoomID);
   });
 
+  it('should update the room ID in URL [setRoomID]', () => {
+    setRoomIDURL('');
+
+    instance.setRoomID(sampleBaseRoomID);
+    expect(window.location.path).toBe('/' + sampleBaseRoomID);
+  });
+  
+  it('should update the room ID in cookies [setRoomID]', () => {
+    instance.setRoomID(sampleBaseRoomID);
+    expect(cookies.get('roomID')).toBe(sampleBaseRoomID);
+  });
+  
   it('should set a message in it\'s state [setMessage]', () => {
     instance.setMessage(sampleMessage);
     expect(instance.state.message).toBe(sampleMessage);
