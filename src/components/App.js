@@ -12,16 +12,23 @@ import conf from '../conf.json';
 class App extends React.Component {
   constructor() {
   super();
-  this.cookies = new Cookies();
-  this.state = {
-    message: '',
-    roomID: this.getRoomID(),
-  };
-  this.socket = null;
+    this.cookies = new Cookies();
+    this.state = {
+      message: '',
+      roomID: this.getRoomID(),
+    };
+    this.socket = null;
   }
 
   setRoomID(roomID) { this.cookies.set('roomID', roomID);}
-  getRoomID() { return this.cookies.get('roomID'); }
+  getRoomID() {
+    /* Check if roomID is in cookie */
+    let roomID = this.cookies.get('roomID');
+    if(typeof(roomID) == 'undefined') {
+      roomID = '';
+    }
+    return roomID;
+  }
   getURLRoomID() { return window.location.pathname.substring(1); }
 
   setMessage(message) { this.setState({ message: message }); }
