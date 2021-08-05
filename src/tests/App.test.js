@@ -6,49 +6,52 @@ import Cookies from 'universal-cookie';
 configure({ adapter: new Adapter() });
 
 describe('App Ops', () => {
-  /* Simulate cookies */
-  Object.defineProperty(document, 'cookie', {
-    writable: true,
-    value: 'roomID=',
-  });
-  delete window.location;
-  window.location = new URL('http://localhost:3000/1234567890');
-
   /* Declare basic constants */
-  const sampleRoomID = '1234567890';
+  const sampleCookieRoomID = '1234567890';
+  const sampleURLRoomID = 'abcdef1234';
   const sampleMessage = 'Hello world!';
   const wrapper = shallow(<App />);
   const instance = wrapper.instance();
   const cookies = new Cookies();
 
+  /* Simulate cookies */
+  Object.defineProperty(document, 'cookie', {
+    writable: true,
+    value: 'roomID=',
+  });
+
+  /* Simulate window.location */
+  delete window.location;
+  window.location = new URL('http://localhost:3000/abcdef1234');
+
   /* Tests */
-  it('should initialize correctly', () => {
+  it('should initialize correctly [constructor]', () => {
     expect(instance.state.message).toBe('');
     expect(instance.state.roomID).toBe('');
   });
 
-  it('should return \'\' if roomID is not set in cookies', () => {
+  it('should return \'\' if roomID is not set in cookies [getRoomID]', () => {
     cookies.remove('roomID');
     expect(instance.getRoomID()).toBe('');
   });
 
-  it('should store the room ID in cookies', () => {
-    instance.setRoomID(sampleRoomID);
-    expect(cookies.get('roomID')).toBe(sampleRoomID);
+  it('should read the room ID from cookies [getRoomID]', () => {
+    cookies.set('roomID', sampleCookieRoomID);
+    const roomID = instance.getRoomID(sampleCookieRoomID);
+    expect(roomID).toBe(sampleCookieRoomID);
   });
 
-  it('should read the room ID from cookies', () => {
-    cookies.set('roomID', sampleRoomID);
-    const roomID = instance.getRoomID(sampleRoomID);
-    expect(roomID).toBe(sampleRoomID);
+  it('should load roomID from the URL [getRoomID]', () => {
+    expect(instance.getRoomID()).toBe(sampleURLRoomID);
   });
 
-  it('should set a message in it\'s state', () => {
+  it('should store the room ID in cookies [setRoomID]', () => {
+    instance.setRoomID(sampleCookieRoomID);
+    expect(cookies.get('roomID')).toBe(sampleCookieRoomID);
+  });
+
+  it('should set a message in it\'s state [setMessage]', () => {
     instance.setMessage(sampleMessage);
     expect(instance.state.message).toBe(sampleMessage);
-  });
-
-  it('should load roomID from the URL', () => {
-    expect(instance.getURLRoomID()).toBe(sampleRoomID);
   });
 });
