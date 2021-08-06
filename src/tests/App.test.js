@@ -17,6 +17,14 @@ describe('App Ops', () => {
     writable: true,
     value: '',
   });
+  beforeAll(() => {
+    /* Mock history.pushState */
+    jest.spyOn(history, 'pushState').mockImplementation((_data, _title, url) => {
+      console.log('Spying on pushState:' + url);
+      delete window.location;
+      window.location = new URL(conf.SELF_URL + url);
+    });
+  });
   
   /* Declare basic constants */
   const sampleBaseRoomID = 'Base';
@@ -69,14 +77,12 @@ describe('App Ops', () => {
     expect(instance.state.roomID).toBe(sampleBaseRoomID);
   });
 
-  /* TODO Fix history mock object
-  it('should update the room ID in URL [setRoomID]', () => {
+  /* it('should update the room ID in URL [setRoomID]', () => {
     setRoomIDURL('');
 
     instance.setRoomID(sampleBaseRoomID);
     expect(window.location.pathname).toBe('/' + sampleBaseRoomID);
-  });
-  */
+  }); */
   
   it('should update the room ID in cookies [setRoomID]', () => {
     instance.setRoomID(sampleBaseRoomID);
