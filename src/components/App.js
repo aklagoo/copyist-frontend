@@ -50,7 +50,6 @@ class App extends React.Component {
 
     socket.on('roomID', (roomID) => {
       this.setRoomID(roomID);
-      this.setState({roomID: roomID});
     });
 
     return socket;

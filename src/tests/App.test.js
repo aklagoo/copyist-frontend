@@ -19,7 +19,8 @@ describe('App Ops', () => {
   });
   beforeAll(() => {
     /* Mock history.pushState */
-    jest.spyOn(history, 'pushState').mockImplementation((_data, _title, url) => {
+    const spy = jest.spyOn(window.history, 'pushState');
+    spy.mockImplementation((_data, _title, url) => {
       console.log('Spying on pushState:' + url);
       delete window.location;
       window.location = new URL(conf.SELF_URL + url);
