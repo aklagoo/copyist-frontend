@@ -1,8 +1,8 @@
 .App {
     display: flex;
-    height: 100vh;
+    margin-top: 20vh;
+    height: 80vh;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-end;
 }
 
@@ -10,4 +10,11 @@
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
+}
+
+.App article {
+    margin: 12px;
+}
+.App .QRBox {
+    margin: 12px;
 }

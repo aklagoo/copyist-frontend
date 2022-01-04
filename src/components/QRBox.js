@@ -1,4 +1,5 @@
 import React from 'react';
+import "../css/QRBox.css";
 
 class QRBox extends React.Component {
   render() {
