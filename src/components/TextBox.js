@@ -5,7 +5,7 @@ class TextBox extends React.Component {
   render() {
     return (
       <div className='TextBox'>
-        <textarea>{this.props.message}</textarea>
+        <textarea onChange={this.props.emitMessage} value={this.props.message} />
       </div>
     );
     

@@ -18,6 +18,7 @@ class App extends React.Component {
       roomID: this.getRoomID(),
     };
     this.socket = null;
+    this.emitMessage = this.emitMessage.bind(this);
   }
 
   setRoomID(roomID) {
@@ -61,7 +62,17 @@ class App extends React.Component {
       this.setMessage(data.message);
     });
 
+    socket.on('update', (data) => {
+      console.log('Lmao');
+      this.setMessage(data);
+    });
+
     return socket;
+  }
+
+  emitMessage(event) {
+    this.setState({message: event.target.value});
+    this.socket.emit('update', event.target.value);
   }
 
   render() {
@@ -72,7 +83,7 @@ class App extends React.Component {
         <QRBox message={this.state.roomID} url={window.location.href}/>
         <article>
         <img className="Banner" src={banner} width={600} alt="" />
-        <TextBox />
+        <TextBox emitMessage={this.emitMessage} message={this.state.message}/>
         </article>
       </main>
       </div>
