@@ -4,7 +4,7 @@ class TextBox extends React.Component {
   render() {
     return (
       <div className='TextBox'>
-        <p>TextBox</p>
+        <textarea>{this.props.message}</textarea>
       </div>
     );
     

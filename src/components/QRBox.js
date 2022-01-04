@@ -4,7 +4,7 @@ class QRBox extends React.Component {
   render() {
     return (
       <div className='QRBox'>
-        <p>QRBox</p>
+        <p>{this.props.message}</p>
       </div>
     );
   }

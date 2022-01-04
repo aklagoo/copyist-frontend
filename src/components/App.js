@@ -23,7 +23,15 @@ class App extends React.Component {
   setRoomID(roomID) {
     this.setState({roomID: roomID});
     window.history.pushState({}, document.title, '/' + roomID);
-    this.cookies.set('roomID', roomID);
+
+    // Set cookies
+    let date = new Date();
+    date.setFullYear(date.getFullYear() + 1);
+    this.cookies.set('roomID', roomID, {
+      sameSite: 'none',
+      secure: true,
+      maxAge: date.getTime(),
+    });
   }
   getRoomID() {
     /* Get roomID */
@@ -31,7 +39,7 @@ class App extends React.Component {
     let roomIDCookie = this.cookies.get('roomID');
 
     /* Return with precedence */
-    if(roomIDURL != '') {
+    if(roomIDURL !== '') {
       return roomIDURL;
     } else if (typeof(roomIDCookie) != 'undefined') {
       return roomIDCookie;
@@ -48,8 +56,9 @@ class App extends React.Component {
       query: { 'roomID': roomID }
     });
 
-    socket.on('roomID', (roomID) => {
-      this.setRoomID(roomID);
+    socket.on('connected', (data) => {
+      this.setRoomID(data.roomID);
+      this.setMessage(data.message);
     });
 
     return socket;
@@ -60,11 +69,11 @@ class App extends React.Component {
       <div className="App">
       <Toolbar />
       <main>
+        <QRBox message={this.state.roomID}/>
         <article>
         <img className="Banner" src={banner} width={600} alt="" />
         <TextBox />
         </article>
-        <QRBox />
       </main>
       </div>
     );
