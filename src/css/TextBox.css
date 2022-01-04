@@ -1,3 +1,16 @@
 .TextBox {
-    height: 100%;
+    margin-top: 32px;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.TextBox textarea {
+    width: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+    font-family: inherit;
+    color: inherit;
+    font-weight: 700;
 }

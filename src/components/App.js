@@ -69,7 +69,7 @@ class App extends React.Component {
       <div className="App">
       <Toolbar />
       <main>
-        <QRBox message={this.state.roomID}/>
+        <QRBox message={this.state.roomID} url={window.location.href}/>
         <article>
         <img className="Banner" src={banner} width={600} alt="" />
         <TextBox />

@@ -1,3 +1,11 @@
 .QRBox {
     height: fit-content;
+    background-color: #ffffff;
+    padding: 24px;
+    border-radius: 8px;
+}
+
+.QRBox p {
+    width: 256px;
+    margin: 16px 0 0 0;
 }
