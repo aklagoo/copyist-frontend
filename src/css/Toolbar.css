@@ -1,0 +1,11 @@
+.Toolbar {
+    margin-bottom: 20px;
+}
+
+.Toolbar button {
+    border: none;
+    padding: 12px;
+    border-radius: 100%;
+    background: "#CCCCCC";
+    color: "rgba(0, 0, 0, 0.4)";
+}
