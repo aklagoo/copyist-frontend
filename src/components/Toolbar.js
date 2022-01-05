@@ -7,7 +7,7 @@ class Toolbar extends React.Component {
   render() {
     return (
       <div className='Toolbar'>
-          <button><Icon path={mdiQrcode} size={1}/></button>
+          <button className={'ButtonToggleQR' + this.props.hiddenClass} onClick={this.props.toggleHiddenClass}><Icon path={mdiQrcode} size={1}/></button>
       </div>
     );
   }

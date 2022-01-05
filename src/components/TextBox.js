@@ -1,7 +1,7 @@
 import React from 'react';
 import "../css/TextBox.css";
 import Icon from '@mdi/react';
-import { mdiContentCopy, mdiContentPaste } from '@mdi/js'; 
+import { mdiContentCopy } from '@mdi/js'; 
 
 class TextBox extends React.Component {
   constructor() {
@@ -18,7 +18,7 @@ class TextBox extends React.Component {
       <div className='TextBox'>
         <textarea onChange={this.props.emitMessage} value={this.props.message} />
         <div className='TextBoxButtons'>
-          <button className='ButtonCopy' onClick={this.handleCopy}><Icon path={mdiContentCopy} size={0.8}/>Copy</button>
+          <button className='ButtonCopy' onClick={this.handleCopy}><Icon path={mdiContentCopy} size={0.8}/> Copy</button>
         </div>
       </div>
     );

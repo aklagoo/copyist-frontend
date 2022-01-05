@@ -16,9 +16,18 @@ class App extends React.Component {
     this.state = {
       message: '',
       roomID: this.getRoomID(),
+      hiddenClass: ' Hidden',
     };
     this.socket = null;
     this.emitMessage = this.emitMessage.bind(this);
+    this.toggleHiddenClass = this.toggleHiddenClass.bind(this);
+  }
+
+  toggleHiddenClass() {
+    if(this.state.hiddenClass === ' Hidden') 
+      this.setState({hiddenClass: ''});
+    else
+      this.setState({hiddenClass: ' Hidden'});
   }
 
   setRoomID(roomID) {
@@ -78,9 +87,9 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <Toolbar />
+      <Toolbar hiddenClass={this.state.hiddenClass} toggleHiddenClass={this.toggleHiddenClass}/>
       <main>
-        <QRBox message={this.state.roomID} url={window.location.href}/>
+        <QRBox message={this.state.roomID} url={window.location.href} hiddenClass={this.state.hiddenClass}/>
         <article>
         <img className="Banner" src={banner} width={600} alt="" />
         <TextBox emitMessage={this.emitMessage} message={this.state.message}/>
