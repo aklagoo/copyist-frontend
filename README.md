@@ -4,9 +4,12 @@
 
 This app makes cross-device text sharing a lot easier, by maintaining a shared textbox across several devices. A new ID is generated when you first open the website and is remembered every time you reopen it. Want to use it on another device? Just copy the link once.
 
-### Libraries
+### Dependencies
 
 It has been built with React, NodeJS and SocketIO.
+
+### License
+[GPLv3](https://github.com/aklagoo/copyist-frontend/blob/main/LICENSE.md)
 
 ## Installation and Usage
 
