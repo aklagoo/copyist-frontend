@@ -12,6 +12,7 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.2"
   },
+  "homepage": "/copyist-frontend",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
