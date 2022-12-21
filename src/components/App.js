@@ -45,7 +45,11 @@ class App extends React.Component {
   }
   getRoomID() {
     /* Get roomID */
-    let roomIDURL = window.location.pathname.substring(3);
+    const roomIDParts = window.location.split('');
+    let roomIDURL = "";
+    if (roomIDParts.length == 6){
+      roomIDURL = roomIDParts[5];
+    }
     let roomIDCookie = this.cookies.get('roomID');
 
     /* Return with precedence */
