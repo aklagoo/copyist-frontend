@@ -76,7 +76,6 @@ class App extends React.Component {
     });
 
     socket.on('update', (data) => {
-      console.log('Lmao');
       this.setMessage(data);
     });
 
@@ -105,7 +104,6 @@ class App extends React.Component {
 
   componentDidMount() {
   this.socket = this.connect(conf.SERVER_URL, this.getRoomID());
-  setTimeout(() => { console.log(this.socket); }, 3000);
   }
 }
 
