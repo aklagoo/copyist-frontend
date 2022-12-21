@@ -32,7 +32,10 @@ class App extends React.Component {
 
   setRoomID(roomID) {
     this.setState({roomID: roomID});
-    window.history.pushState({}, document.title, conf.SELF_URL + '/#/' + roomID);
+
+    const url = window.location.toString().split('#/')[0];
+
+    window.history.pushState({}, document.title, url + '/#/' + roomID);
 
     // Set cookies
     let date = new Date();
