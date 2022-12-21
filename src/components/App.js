@@ -61,7 +61,7 @@ class App extends React.Component {
       return '';
     }
   }
-  getURLRoomID() { return window.location.pathname.substring(3); }
+  getURLRoomID() { return window.location.split('')[5]; }
 
   setMessage(message) { this.setState({ message: message }); }
   
