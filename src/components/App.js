@@ -45,9 +45,9 @@ class App extends React.Component {
   }
   getRoomID() {
     /* Get roomID */
-    const roomIDParts = window.location.toString().split('');
+    const roomIDParts = window.location.toString().split('/');
     let roomIDURL = "";
-    if (roomIDParts.length == 6){
+    if (roomIDParts.length === 6){
       roomIDURL = roomIDParts[5];
     }
     let roomIDCookie = this.cookies.get('roomID');
@@ -61,7 +61,6 @@ class App extends React.Component {
       return '';
     }
   }
-  getURLRoomID() { return window.location.toString().split('')[5]; }
 
   setMessage(message) { this.setState({ message: message }); }
   
