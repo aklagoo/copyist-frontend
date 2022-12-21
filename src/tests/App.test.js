@@ -8,7 +8,7 @@ configure({ adapter: new Adapter() });
 
 function setRoomIDURL(roomID) {
   delete window.location;
-  window.location = new URL(conf.SELF_URL + '/' + roomID);
+  window.location = new URL(conf.SELF_URL + '/#/' + roomID);
 }
 
 describe('App Ops', () => {
