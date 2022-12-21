@@ -32,7 +32,7 @@ class App extends React.Component {
 
   setRoomID(roomID) {
     this.setState({roomID: roomID});
-    window.history.pushState({}, document.title, '/' + roomID);
+    window.history.pushState({}, document.title, conf.SELF_URL + '/#/' + roomID);
 
     // Set cookies
     let date = new Date();
@@ -45,7 +45,7 @@ class App extends React.Component {
   }
   getRoomID() {
     /* Get roomID */
-    let roomIDURL = window.location.pathname.substring(1);
+    let roomIDURL = window.location.pathname.substring(3);
     let roomIDCookie = this.cookies.get('roomID');
 
     /* Return with precedence */
@@ -57,7 +57,7 @@ class App extends React.Component {
       return '';
     }
   }
-  getURLRoomID() { return window.location.pathname.substring(1); }
+  getURLRoomID() { return window.location.pathname.substring(3); }
 
   setMessage(message) { this.setState({ message: message }); }
   
