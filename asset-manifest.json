@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/copyist-frontend/static/css/main.2e7ac3e8.chunk.css",
-    "main.js": "/copyist-frontend/static/js/main.66f05f70.chunk.js",
-    "main.js.map": "/copyist-frontend/static/js/main.66f05f70.chunk.js.map",
+    "main.js": "/copyist-frontend/static/js/main.8ec7243a.chunk.js",
+    "main.js.map": "/copyist-frontend/static/js/main.8ec7243a.chunk.js.map",
     "runtime-main.js": "/copyist-frontend/static/js/runtime-main.f8b6434b.js",
     "runtime-main.js.map": "/copyist-frontend/static/js/runtime-main.f8b6434b.js.map",
-    "static/js/2.ffa9d657.chunk.js": "/copyist-frontend/static/js/2.ffa9d657.chunk.js",
-    "static/js/2.ffa9d657.chunk.js.map": "/copyist-frontend/static/js/2.ffa9d657.chunk.js.map",
+    "static/js/2.0f58bf6e.chunk.js": "/copyist-frontend/static/js/2.0f58bf6e.chunk.js",
+    "static/js/2.0f58bf6e.chunk.js.map": "/copyist-frontend/static/js/2.0f58bf6e.chunk.js.map",
     "static/js/3.924617b8.chunk.js": "/copyist-frontend/static/js/3.924617b8.chunk.js",
     "static/js/3.924617b8.chunk.js.map": "/copyist-frontend/static/js/3.924617b8.chunk.js.map",
     "index.html": "/copyist-frontend/index.html",
     "static/css/main.2e7ac3e8.chunk.css.map": "/copyist-frontend/static/css/main.2e7ac3e8.chunk.css.map",
-    "static/js/2.ffa9d657.chunk.js.LICENSE.txt": "/copyist-frontend/static/js/2.ffa9d657.chunk.js.LICENSE.txt",
+    "static/js/2.0f58bf6e.chunk.js.LICENSE.txt": "/copyist-frontend/static/js/2.0f58bf6e.chunk.js.LICENSE.txt",
     "static/media/banner.edd50df5.svg": "/copyist-frontend/static/media/banner.edd50df5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.f8b6434b.js",
-    "static/js/2.ffa9d657.chunk.js",
+    "static/js/2.0f58bf6e.chunk.js",
     "static/css/main.2e7ac3e8.chunk.css",
-    "static/js/main.66f05f70.chunk.js"
+    "static/js/main.8ec7243a.chunk.js"
   ]
 }
